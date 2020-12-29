@@ -1,4 +1,8 @@
 #===================== MASTER =====================
+
+#ISSUE -> JSON FILE NOT OPENING FROM OTHER SCRIPTS BUT ONLY Database
+#WHAT NEXT? -> START MATCHES + REMOVE PLAYER + LEADERBOARD  
+
 from internal.player import Player
 from internal.basic import clear_screen, prompt, wait
 from customize import customize_menu
@@ -8,7 +12,7 @@ from matches import matches_menu
 menu_text = ('''\n\n~~~~~~~~~~~~ MASTER MENU ~~~~~~~~~~~~
     1. Customize Players Database - Press 1
     2. Start Matches              - Press 2
-    3. Analyze Database           - Press 2
+    3. Analyze Database           - Press 3
 ''')
 
 def main_menu():
