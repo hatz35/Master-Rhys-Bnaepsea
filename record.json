@@ -11,6 +11,18 @@
                                 "avnoz": "14",
                                 "main_guild": "1"
                         }
+                },
+                "Entry#2": {
+                        "player_data": {
+                                "username": "esgarle",
+                                "rating": "3000",
+                                "wins": "40",
+                                "losses": "4040",
+                                "draws": "40",
+                                "bnae": "404",
+                                "avnoz": "04",
+                                "main_guild": "40"
+                        }
                 }
         }
 }
