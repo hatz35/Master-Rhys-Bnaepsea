@@ -1,6 +1,4 @@
 #===================== MASTER =====================
-
-#ISSUE -> Player Class Useless
 #WHAT NEXT? -> START MATCHES + REMOVE PLAYER + LEADERBOARD
 
 from internal.player import Player

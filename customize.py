@@ -1,5 +1,5 @@
 #===================== CUSTOMIZE =====================
-from internal.player import Player
+from internal.player import Player, player_data
 from internal.basic import clear_screen, prompt, wait
 import json
 
@@ -14,31 +14,44 @@ def saveJson(newfile):
 
 
 #FUNCTIONS
-def add_to_json(newname, newrating):
-    data = getJson()
-    for ind in data["individuals"]:
-        if ind == newname:
-            print(f"{newname} is alreaedy there)")
-            wait(1)
-            customize_menu()
 
-    data["individuals"][newname] = newrating
+#not_working
+def update_entry():
+    data = getJson()
+    count=1
+    for i in data["individuals"].items():
+        data["individuals"][f"Entry#{count}"] = data["individuals"].pop(i)
+        count += 1
     saveJson(data)
-    print(f"{newname} has been successfully added.")
+
+
+def add_to_json(player_data):
+    data = getJson()
+    newplayer = Player(player_data)
+    #howmany
+    count=1
+    for i in data["individuals"].items():
+        count += 1
+    data["individuals"][f"Entry#{count}"] = newplayer.__dict__
+    saveJson(data)
+    print(f"{newplayer.player_data['username']} has been successfully added.")
     wait(1)
+    #update_entry()
     customize_menu()
+
 
 def remove_from_json(name):
     data = getJson()
-    for ind in data["individuals"]:
-        if ind == name:
-            del data["individuals"][name]
+    for ind, val in data["individuals"].items():
+        if val["player_data"]["username"] == name:
+            del data["individuals"][ind]
             print(f"{name} has been removed")
             wait(1)
             saveJson(data)
             customize_menu()
     print(f"{name} not found")
     wait(1)
+    #update_entry()
     customize_menu()
 
 def delete_db():
@@ -79,8 +92,19 @@ def customize_menu():
 def add_player():
     clear_screen()
     try:
-        newname, newrating = input("Enter Name: "), input("Enter Rating: ")
-        add_to_json(newname, newrating)
+        for i in player_data:
+            player_data[i] = input(f"Enter {i}: ")
+            if i == "username":
+                data = getJson()
+                for entry, val in data["individuals"].items():
+                    old = val["player_data"]["username"]
+                    new = player_data[i]
+                    if new == old:
+                        print(f"{new} is alreaedy there")
+                        wait(1)
+                        customize_menu()
+
+        add_to_json(player_data)
         customize_menu()
 
     except ValueError as err:
