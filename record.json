@@ -1,27 +1,58 @@
 {
-        "individuals": {
-                "Entry#1": {
-                        "player_data": {
-                                "username": "hatz",
-                                "rating": "341",
-                                "wins": "24",
-                                "losses": "12",
-                                "draws": "41",
-                                "bnae": "24",
-                                "avnoz": "14",
-                                "main_guild": "1"
+        "teams": {
+                "Conticeo": {
+                        "team_data": {
+                                "Epithet": "Conticeo",
+                                "Rating": 145,
+                                "Wins": 0,
+                                "Losses": 4,
+                                "Draws": 0,
+                                "Size": 4,
+                                "Members": [
+                                        "Emr",
+                                        "Fonthers",
+                                        "Sam",
+                                        "Lloya"
+                                ],
+                                "Level": 1,
+                                "Description": "The Classic Alphrid ~ Princess  "
                         }
                 },
-                "Entry#2": {
-                        "player_data": {
-                                "username": "esgarle",
-                                "rating": "3000",
-                                "wins": "40",
-                                "losses": "4040",
-                                "draws": "40",
-                                "bnae": "404",
-                                "avnoz": "04",
-                                "main_guild": "40"
+                "Mangata": {
+                        "team_data": {
+                                "Epithet": "Mangata",
+                                "Rating": 135,
+                                "Wins": 4,
+                                "Losses": 0,
+                                "Draws": 0,
+                                "Size": 5,
+                                "Members": [
+                                        "An-Xian",
+                                        "King",
+                                        "Rethen",
+                                        "Jack",
+                                        "Morgan"
+                                ],
+                                "Level": 1,
+                                "Description": "The Circus of Power"
+                        }
+                },
+                "Orao": {
+                        "team_data": {
+                                "Epithet": "Orao",
+                                "Rating": 140,
+                                "Wins": 0,
+                                "Losses": 0,
+                                "Draws": 0,
+                                "Size": 4,
+                                "Members": [
+                                        "Alvis",
+                                        "Esgarle",
+                                        "Kayleigh",
+                                        "Lugior"
+                                ],
+                                "Level": 1,
+                                "Description": "The Akatsuki ~ Princess"
                         }
                 }
         }

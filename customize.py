@@ -1,5 +1,5 @@
 #===================== CUSTOMIZE =====================
-from internal.player import Player, player_data
+from internal.team import Team, team_data
 from internal.basic import clear_screen, prompt, wait
 import json
 
@@ -15,26 +15,16 @@ def saveJson(newfile):
 
 #FUNCTIONS
 
-#not_working
-def update_entry():
+def add_to_json(team_data):
     data = getJson()
-    count=1
-    for i in data["individuals"].items():
-        data["individuals"][f"Entry#{count}"] = data["individuals"].pop(i)
-        count += 1
-    saveJson(data)
-
-
-def add_to_json(player_data):
-    data = getJson()
-    newplayer = Player(player_data)
+    newteam = Team(team_data)
     #howmany
     count=1
-    for i in data["individuals"].items():
+    for i in data["teams"].items():
         count += 1
-    data["individuals"][f"Entry#{count}"] = newplayer.__dict__
+    data["teams"][f"{newteam.team_data['Epithet']}"] = newteam.__dict__
     saveJson(data)
-    print(f"{newplayer.player_data['username']} has been successfully added.")
+    print(f"{newteam.team_data['Epithet']} has been successfully added.")
     wait(1)
     #update_entry()
     customize_menu()
@@ -42,9 +32,9 @@ def add_to_json(player_data):
 
 def remove_from_json(name):
     data = getJson()
-    for ind, val in data["individuals"].items():
-        if val["player_data"]["username"] == name:
-            del data["individuals"][ind]
+    for ind, val in data["teams"].items():
+        if val["team_data"]["Epithet"] == name:
+            del data["teams"][ind]
             print(f"{name} has been removed")
             wait(1)
             saveJson(data)
@@ -56,7 +46,7 @@ def remove_from_json(name):
 
 def delete_db():
     data = getJson()
-    data["individuals"] = {}
+    data["teams"] = {}
     print(f"Database Cleared")
     wait(1)
     saveJson(data)
@@ -65,8 +55,8 @@ def delete_db():
 #MENU
 
 customize_text = ('''\n\n~~~~~~~~~~~~ CUSTOMIZE ~~~~~~~~~~~~
-    1. Add Individual             - Press 1
-    2. Remove Individual          - Press 2
+    1. Add Alphrid                - Press 1
+    2. Remove Alphrid             - Press 2
     3. Back to Menu               - Press 3
     4. Delete Database <WARNING>  - Press 4
 ''')
@@ -76,48 +66,66 @@ def customize_menu():
     print(customize_text)
     p = prompt(True, "Press a Number: ")
     if p  == 1:
-        add_player()
+        add_team()
     elif p == 2:
-        remove_player()
+        remove_team()
     elif p == 3:
         from master import main_menu
         main_menu()
     elif p == 4:
-        delete_players()
+        warn = input("Are you sure? Type 'Rhys' to Delete Everything")
+        if warn.lower() == "rhys":
+            delete_teams()
+        else:
+            wait(2)
+            customize_menu()
     else:
         print("Try Again. Press 1 or 2 or 3 or 4")
         wait(2)
         customize_menu()
 
-def add_player():
+def clear_stuff():
+    for  _, j in team_data.items():
+        j == None
+
+
+def add_team():
     clear_screen()
     try:
-        for i in player_data:
-            player_data[i] = input(f"Enter {i}: ")
-            if i == "username":
+        for i in team_data:
+            if i == "Epithet":
+                team_data[i] = input(f"Enter {i}: ")
                 data = getJson()
-                for entry, val in data["individuals"].items():
-                    old = val["player_data"]["username"]
-                    new = player_data[i]
+                for entry, val in data["teams"].items():
+                    old = val["team_data"]["Epithet"]
+                    new = team_data[i]
                     if new == old:
                         print(f"{new} is alreaedy there")
                         wait(1)
-                        customize_menu()
+            elif i == "Members":
+                for j in range(1, int(team_data["Size"])+1):
+                    team_data["Members"].append(input(f"Enter Member {j}: "))
+            elif i == "Description":
+                team_data[i] = input(f"Enter {i}: ")
+            else:
+                team_data[i] = int(input(f"Enter {i}: "))
 
-        add_to_json(player_data)
+        add_to_json(team_data)
+        clear_stuff()
         customize_menu()
 
     except ValueError as err:
         print(err)
         print("Try Again")
         wait(1)
+        clear_stuff()
         customize_menu()
 
-def remove_player():
+def remove_team():
     clear_screen()
-    name = input("Find individual by their name - ")
+    name = input("Find Alphrid by their name - ")
     remove_from_json(name)
 
-def delete_players():
+def delete_teams():
     clear_screen()
     delete_db()

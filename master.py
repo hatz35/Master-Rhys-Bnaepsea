@@ -1,7 +1,4 @@
 #===================== MASTER =====================
-#WHAT NEXT? -> START MATCHES + REMOVE PLAYER + LEADERBOARD
-
-from internal.player import Player
 from internal.basic import clear_screen, prompt, wait
 from customize import customize_menu
 from analyze import analyze_menu
@@ -10,9 +7,9 @@ import os
 
 #STARTING MENU
 
-menu_text = ('''\n\n~~~~~~~~~~~~ MASTER MENU ~~~~~~~~~~~~
-    1. Customize Players Database - Press 1
-    2. Start Matches              - Press 2
+menu_text = ('''\n\n~~~~~~~~~~~~ ALPHRID - THE MASTER MENU ~~~~~~~~~~~~
+    1. Customize Database         - Press 1
+    2. Arena                      - Press 2
     3. Analyze Database           - Press 3
 ''')
 
@@ -36,7 +33,7 @@ def main_menu():
         clear_screen()
         print(err)
         print("Try Again\n\n\n")
-        wait(2)
+        wait(1)
         main_menu()
 
 main_menu()

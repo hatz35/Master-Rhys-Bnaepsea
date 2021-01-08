@@ -16,10 +16,10 @@ def saveJson(newfile):
 #FUNCTIONS
 def waiter():
     wait(2)
-    n = input("Press Enter to Continue")
+    n = input("\nPress Enter to Continue")
     analyze_menu()
 
-def print_player_data(count, value):
+def print_team_data(count, value):
     main = f"\n[{count}]"
     print(main)
     for i, v in value.items():
@@ -28,32 +28,32 @@ def print_player_data(count, value):
         main += newdata
 
 def find_specific():
-    n = input("Enter username you want to see")
+    n = input("Enter the name of the Alphrid you want to see - ")
     data = getJson()
-    for ind, val in data["individuals"].items():
-        if val["player_data"]["username"] == n:
-            print_player_data(1, val["player_data"])
+    for ind, val in data["teams"].items():
+        if val["team_data"]["Epithet"] == n:
+            print_team_data(1, val["team_data"])
             waiter()
     print("Not Found")
     waiter()
 
 
-def listingplayers():
-    print("----- All Players -----")
+def listingteams():
+    print("----- All Teams -----")
     count = 1
     data = getJson()
-    for i, v in data["individuals"].items():
-        print_player_data(count, v["player_data"])
+    for i, v in data["teams"].items():
+        print_team_data(count, v["team_data"])
         count += 1
     waiter()
 
 def top():
-    print("----- All Players -----")
+    print("----- All Teams -----")
     count = 1
     data = getJson()
     x = {}
-    for ind, val in data["individuals"].items():
-        x[val["player_data"]["username"]] = int(val["player_data"]["rating"])
+    for ind, val in data["teams"].items():
+        x[val["team_data"]["Epithet"]] = int(val["team_data"]["Rating"])
     new_x = {k: v for k, v in sorted(x.items(), key=lambda item: item[1], reverse=True)}
     for i, v in new_x.items():
         print(f"[{count}] {i} - {v}")
@@ -74,7 +74,7 @@ def analyze_menu():
     print(analyze_text)
     p = prompt(True, "Press a Number: ")
     if p  == 1:
-        listingplayers()
+        listingteams()
     elif p == 2:
         top()
     elif p == 3:
